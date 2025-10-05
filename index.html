@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify | Prodigy InfoTech</title>
+    <link rel="stylesheet" href="https://cdn.lineicons.com/4.0/lineicons.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: #333;
+        }
+
+        /* Header */
+        .header {
+            background: #3d5afe;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .logo-icon::before {
+            content: '💡';
+            font-size: 20px;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .logo-text span:first-child {
+            font-weight: 700;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+
+        .logo-text span:last-child {
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: opacity 0.3s;
+        }
+
+        .nav a:hover {
+            opacity: 0.8;
+        }
+
+        /* Banner */
+        .banner {
+            background: #3d5afe;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .banner h1 {
+            color: white;
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        /* Main Content */
+        .main-content {
+            background: #f5f5f5;
+            padding: 4rem 0;
+            min-height: 60vh;
+        }
+
+        .certificate-box {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            padding: 2.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .certificate-box::before {
+            content: '';
+            position: absolute;
+            right: 50%;
+            top: 50%;
+            transform: translate(50%, -50%);
+            width: 320px;
+            height: 320px;
+            border: 25px solid rgba(0, 0, 0, 0.03);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .certificate-box::after {
+            content: '✓';
+            position: absolute;
+            right: 50%;
+            top: 50%;
+            transform: translate(50%, -50%);
+            font-size: 200px;
+            opacity: 0.03;
+            z-index: 0;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .certificate-box > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .certificate-box h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 2rem;
+        }
+
+        .detail-row {
+            display: flex;
+            align-items: flex-start;
+            padding: 1rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-icon {
+            width: 20px;
+            margin-right: 1rem;
+            color: #999;
+            flex-shrink: 0;
+            padding-top: 2px;
+        }
+
+        .detail-content {
+            flex: 1;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-right: 0.5rem;
+        }
+
+        .detail-value {
+            color: #7f8c8d;
+        }
+
+        /* Footer */
+         .footer {
+            background-color: #1a2332; 
+            color: #b0b8c1;
+            padding-top: 3rem; 
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer-shape-1, .footer-shape-2, .footer-shape-3 {
+            position: absolute;
+            z-index: 0;
+            background-repeat: no-repeat;
+            pointer-events: none; 
+        }
+
+        .footer-shape-1 {
+            background-image: url('assets/shape-1.png');
+            top: 0;
+            left: 0;
+            width: 300px;
+            height: 300px;
+            background-size: contain;
+        }
+
+        .footer-shape-2 {
+            background-image: url('assets/shape-2.png');
+            top: 20px; 
+            right: 20px; 
+            width: 150px;
+            height: 100px;
+            opacity: 0.4;
+        }
+
+        .footer-shape-3 {
+            background-image: url('assets/shape-3.png');
+            bottom: -50px; 
+            right: -50px; 
+            width: 350px;
+            height: 350px;
+            background-size: contain;
+            opacity: 0.8;
+        }
+
+        .footer-content, .footer-bottom {
+            position: relative; 
+            z-index: 1;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr;
+            gap: 2rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid #2d3a4d;
+        }
+
+        .footer-section h3 {
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #b0b8c1;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.75rem;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .social-link i {
+            font-size: 16px;
+        }
+
+        .footer-bottom {
+            padding: 2rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .footer-bottom-links a {
+            color: #b0b8c1;
+            text-decoration: none;
+        }
+
+        .footer-bottom-links a:hover {
+            color: white;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 45px;
+            height: 45px;
+            background: #3d5afe;
+            color: white;
+            border-radius: 8px; /* MODIFICATION: Changed back to a square with rounded corners */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(61, 90, 254, 0.4);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            z-index: 100;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(61, 90, 254, 0.5);
+        }
+
+        .back-to-top i {
+            font-size: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                display: none;
+            }
+
+            .banner h1 {
+                font-size: 2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            .footer-bottom-links {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .certificate-box {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    </head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">
+                    <img src="assets/logo1.png" alt="Prodigy InfoTech Logo">
+                </a>
+                <nav>
+                    <ul class="nav">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#internships">Internships</a></li>
+                        <li><a href="#faqs">FAQs</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#verify">Verify</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Banner -->
+    <section class="banner">
+        <div class="container">
+            <h1>Verify</h1>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="main-content">
+        <div class="container">
+            <div class="certificate-box">
+                <h2>Certificate Details</h2>
+                
+                <div class="detail-row">
+                    <div class="detail-icon">
+                        <i class="lni lni-tag"></i>
+                    </div>
+                    <div class="detail-content">
+                        <span class="detail-label">CIN:</span>
+                        <span class="detail-value">PIT/AUG25/04557</span>
+                    </div>
+                </div>
+
+                <div class="detail-row">
+                    <div class="detail-icon">
+                        <i class="lni lni-user"></i>
+                    </div>
+                    <div class="detail-content">
+                        <span class="detail-label">Name:</span>
+                        <span class="detail-value">Sejal Singh</span>
+                    </div>
+                </div>
+
+                <div class="detail-row">
+                    <div class="detail-icon">
+                        <i class="lni lni-code"></i>
+                    </div>
+                    <div class="detail-content">
+                        <span class="detail-label">Internship Track:</span>
+                        <span class="detail-value">Machine Learning</span>
+                    </div>
+                </div>
+
+                <div class="detail-row">
+                    <div class="detail-icon">
+                        <i class="lni lni-graduation"></i>
+                    </div>
+                    <div class="detail-content">
+                        <span class="detail-label">College:</span>
+                        <span class="detail-value">Vivekanand Education Society of Arts Science and Commerce, Chembur</span>
+                    </div>
+                </div>
+
+                <div class="detail-row">
+                    <div class="detail-icon">
+                        <i class="lni lni-play"></i>
+                    </div>
+                    <div class="detail-content">
+                        <span class="detail-label">Start Date:</span>
+                        <span class="detail-value">01/08/2025</span>
+                    </div>
+                </div>
+
+                <div class="detail-row">
+                    <div class="detail-icon">
+                        <i class="lni lni-stop"></i>
+                    </div>
+                    <div class="detail-content">
+                        <span class="detail-label">End Date:</span>
+                        <span class="detail-value">31/08/2025</span>
+                    </div>
+                </div>
+
+                <div class="detail-row">
+                    <div class="detail-icon">
+                        <i class="lni lni-calendar"></i>
+                    </div>
+                    <div class="detail-content">
+                        <span class="detail-label">Issue Date:</span>
+                        <span class="detail-value">04/09/2025</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-shape-1"></div>
+        <div class="footer-shape-2"></div>
+        <div class="footer-shape-3"></div>
+
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div style="margin-bottom: 1.5rem;">
+                         <img src="assets/logo1.png" alt="Prodigy InfoTech Logo" style="height: 40px;">
+                    </div>
+                    <p>An EdTech Startup built by a team of passionate educators and entrepreneurs who are committed to transforming the way people learn and grow.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>About Us</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#faqs">FAQs</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Social</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://www.instagram.com/prodigy_infotech/" class="social-link"><i class="lni lni-instagram"></i> Instagram</a></li>
+                        <li><a href="https://www.linkedin.com/company/prodigy-infotech/" class="social-link"><i class="lni lni-linkedin-original"></i> LinkedIn</a></li>
+                        <li><a href="https://t.me/prodigy_infotech" class="social-link"><i class="lni lni-telegram-original"></i> Telegram</a></li>
+                        <li><a href="https://twitter.com/prodigy_infot" class="social-link"><i class="lni lni-twitter-original"></i> Twitter</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Our Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#internship">Internships</a></li>
+                        <li><a href="/services">Consulting</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Other Info</h3>
+                    <p><strong style="color: white;">Address:</strong> Gandhi Nagar, Upper Worli, Worli, Mumbai - 400018</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Prodigy InfoTech. All Rights Reserved.</p>
+                <ul class="footer-bottom-links">
+                    <li><a href="/privacy-policy">Privacy policy</a></li>
+                    <li><a href="/code-of-conduct">Code of Conduct</a></li>
+                    <li><a href="/terms-and-conditions">Terms & Conditions</a></li>
+                    <li><a href="/returns">Returns</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top">
+        <i class="lni lni-chevron-up"></i>
+    </a>
+
+    <script>
+        // Smooth scroll for back to top
+        document.querySelector('.back-to-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
